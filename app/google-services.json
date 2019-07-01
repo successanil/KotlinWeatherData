@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "638294128850",
+    "firebase_url": "https://kotlinfirebasedemo-39597.firebaseio.com",
+    "project_id": "kotlinfirebasedemo-39597",
+    "storage_bucket": "kotlinfirebasedemo-39597.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638294128850:android:66f2674ab75d3798",
+        "android_client_info": {
+          "package_name": "in.relsellglobal.firebasedatabasedemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "638294128850-0b0vul7hdvrt0cacgrdmqvfcbif7v95d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJH6YNiNVPRc0VsFVOnTAhy_RuBhAkrqk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "638294128850-0b0vul7hdvrt0cacgrdmqvfcbif7v95d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
