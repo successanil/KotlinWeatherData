@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@drawable/row_background"
+             android:layout_margin="@dimen/text_margin"
+             android:padding="@dimen/text_margin"
+             android:orientation="vertical"
+             tools:context=".DetailFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:textColor="#FFF"
+            android:id="@+id/cityName"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:id="@+id/cityTemp"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
