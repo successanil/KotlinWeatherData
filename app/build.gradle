@@ -4,6 +4,10 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+def localProperitiesFile = rootProject.file("local.properties")
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(localProperitiesFile))
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -13,6 +17,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "OPENWEATHERDATA_API_KEY", localProperties['openweather_data_api_key']
     }
     buildTypes {
         release {

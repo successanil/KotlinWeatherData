@@ -31,7 +31,7 @@ class FrontListFragment : Fragment() {
 
     val cityContentList: MutableList<CityContent> = ArrayList()
 
-    val APPID = "<ADD_YOUR_WEATHERDATA_APIKEY_HERE>"
+    val APPID = BuildConfig.OPENWEATHERDATA_API_KEY
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
