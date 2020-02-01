@@ -4,15 +4,16 @@
 
 package `in`.relsellglobal.firebasedatabasedemo
 
-import `in`.relsellglobal.firebasedatabasedemo.pojo.CityContent
+import `in`.relsellglobal.firebasedatabasedemo.viewmodels.CitiesViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.util.*
+
 
 /**
  * A fragment representing a list of Items.
@@ -25,13 +26,9 @@ class FrontListFragment : Fragment() {
     private var columnCount = 1
 
     private var recyclerView:RecyclerView? = null
-
-
     private var myItemRecyclerViewAdapter : MyItemRecyclerViewAdapter? = null
 
-    val cityContentList: MutableList<CityContent> = ArrayList()
 
-    val APPID = BuildConfig.OPENWEATHERDATA_API_KEY
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,66 +43,21 @@ class FrontListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_item_list, container, false)
-        recyclerView = view.findViewById(R.id.list);
-        // Set the adapter
-
-
+        recyclerView = view.findViewById(R.id.list)
         return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
-        var city = CityContent()
-        city.cityName = "dehradun"
-        city.apiUrl =  "http://api.openweathermap.org/data/2.5/weather?q="+city.cityName+"&appid="+APPID
-
-        cityContentList.add(city);
-
-        city = CityContent()
-        city.cityName = "new delhi"
-        city.apiUrl =  "http://api.openweathermap.org/data/2.5/weather?q="+city.cityName+"&appid="+APPID
-        cityContentList.add(city);
-
-
-        city = CityContent()
-        city.cityName = "hyderabad"
-        city.apiUrl =  "http://api.openweathermap.org/data/2.5/weather?q="+city.cityName+"&appid="+APPID
-        cityContentList.add(city);
-
-
-        city = CityContent()
-        city.cityName = "chennai"
-        city.apiUrl =  "http://api.openweathermap.org/data/2.5/weather?q="+city.cityName+"&appid="+APPID
-        cityContentList.add(city);
-
-
-        city = CityContent()
-        city.cityName = "mumbai"
-        city.apiUrl =  "http://api.openweathermap.org/data/2.5/weather?q="+city.cityName+"&appid="+APPID
-        cityContentList.add(city);
-
-        city = CityContent()
-        city.cityName = "mangalore"
-        city.apiUrl =  "http://api.openweathermap.org/data/2.5/weather?q="+city.cityName+"&appid="+APPID
-        cityContentList.add(city);
-
-        city = CityContent()
-        city.cityName = "dispur"
-        city.apiUrl =  "http://api.openweathermap.org/data/2.5/weather?q="+city.cityName+"&appid="+APPID
-        cityContentList.add(city);
-
-
-        city = CityContent()
-        city.cityName = "indore"
-        city.apiUrl =  "http://api.openweathermap.org/data/2.5/weather?q="+city.cityName+"&appid="+APPID
-        cityContentList.add(city);
         recyclerView!!.layoutManager = LinearLayoutManager(activity);
-        myItemRecyclerViewAdapter = MyItemRecyclerViewAdapter(cityContentList,activity)
-        recyclerView!!.adapter = myItemRecyclerViewAdapter
 
+        val model = ViewModelProviders.of(this).get(CitiesViewModel::class.java)
+        model.getCitiesList().observe(this, androidx.lifecycle.Observer { cityContentList ->
+            myItemRecyclerViewAdapter = MyItemRecyclerViewAdapter(cityContentList,activity)
+            recyclerView!!.adapter = myItemRecyclerViewAdapter
 
+        })
 
 
     }
@@ -114,17 +66,6 @@ class FrontListFragment : Fragment() {
         super.onDetach()
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson
-     * [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
 
     companion object {
 
