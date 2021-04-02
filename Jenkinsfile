@@ -3,7 +3,8 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh 'echo "openweather_data_api_key=aabb" >> local.properties'
+        sh '''echo "openweather_data_api_key=aabb" >> local.properties
+echo "sdk.dir=/home/relsell/Android/Sdk" >> local.properties'''
         sh './gradlew build'
       }
     }
