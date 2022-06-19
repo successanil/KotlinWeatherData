@@ -53,5 +53,19 @@ class MainActivityForWeatherData : AppCompatActivity(),HasAndroidInjector {
     }
 
 
+    override fun onBackPressed() {
+        if(supportFragmentManager.backStackEntryCount > 1 ) {
+            comeBackFromDetailFragment()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+
+    fun comeBackFromDetailFragment(){
+        FragmentLaunchBackHelpers.comeBackFromFragmentCommon(R.id.root,supportFragmentManager,frontListFragment,detailFragment)
+    }
+
+
 
 }

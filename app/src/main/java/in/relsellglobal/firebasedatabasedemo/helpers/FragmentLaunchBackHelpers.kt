@@ -21,5 +21,12 @@ class FragmentLaunchBackHelpers {
             fT.commit()
         }
 
+        fun comeBackFromFragmentCommon(layoutId:Int,supportFragmentManager:FragmentManager,targetFragmentToBeShown:Fragment,
+                                       outgoingFragment : Fragment){
+            var ft = supportFragmentManager.beginTransaction()
+            ft.remove(outgoingFragment)
+            ft.add(layoutId, targetFragmentToBeShown).commit()
+        }
+
     }
 }
