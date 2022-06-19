@@ -2,6 +2,7 @@ package `in`.relsellglobal.firebasedatabasedemo.viewmodels
 
 import `in`.relsellglobal.firebasedatabasedemo.BuildConfig
 import `in`.relsellglobal.firebasedatabasedemo.models.CityContent
+import `in`.relsellglobal.firebasedatabasedemo.models.CityContentDetailNetwork
 import `in`.relsellglobal.firebasedatabasedemo.models.CityContentNetwork
 import `in`.relsellglobal.firebasedatabasedemo.repository.WeatherDataRepository
 import androidx.lifecycle.LiveData
@@ -10,10 +11,12 @@ import androidx.lifecycle.ViewModel
 
 
 class CitiesViewModel(private val weatherDataRepository: WeatherDataRepository) : ViewModel() {
-    val APPID =
-        BuildConfig.OPENWEATHERDATA_API_KEY
+
+
 
     private lateinit var citiesContent: MutableLiveData<List<CityContentNetwork>>
+
+    private lateinit var cityContentNetworkDetail: MutableLiveData<CityContentDetailNetwork>
 
 
     suspend fun getCitiesList(): LiveData<List<CityContentNetwork>> {
@@ -24,9 +27,21 @@ class CitiesViewModel(private val weatherDataRepository: WeatherDataRepository) 
         return citiesContent
     }
 
+    suspend fun getCityDetail(cityName:String): LiveData<CityContentDetailNetwork> {
+        if (!::cityContentNetworkDetail.isInitialized) {
+            citiesContent = MutableLiveData()
+            fetchTempretureForCity(cityName)
+        }
+        return cityContentNetworkDetail
+    }
+
 
     private suspend fun loadCities() {
         citiesContent = weatherDataRepository.getWeatherDataCityList()
+    }
+
+    private suspend fun fetchTempretureForCity(cityName: String) {
+        cityContentNetworkDetail = weatherDataRepository.fetchTempretureForCity(cityName)
     }
 
 

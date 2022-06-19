@@ -6,6 +6,9 @@ package `in`.relsellglobal.firebasedatabasedemo
 
 
 import `in`.relsellglobal.firebasedatabasedemo.models.CityContent
+import `in`.relsellglobal.firebasedatabasedemo.utils.Utils
+import `in`.relsellglobal.firebasedatabasedemo.viewmodels.CitiesViewModel
+import `in`.relsellglobal.firebasedatabasedemo.viewmodels.CityViewModelFactory
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -14,12 +17,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.lang.Float.parseFloat
 import javax.inject.Inject
@@ -40,6 +47,9 @@ class DetailFragment @Inject constructor(): DaggerFragment() {
     var textView : TextView? = null
     var textViewCityName : TextView? = null
 
+    @Inject
+    lateinit var cityViewModelFactory: CityViewModelFactory
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         AndroidSupportInjection.inject(this)
@@ -56,46 +66,64 @@ class DetailFragment @Inject constructor(): DaggerFragment() {
         return v
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         cityContent = arguments?.getParcelable("cityContent")
 
-        sendGet(cityContent)
+        sendGetWithRetrofit(cityContent)
 
     }
 
-    fun sendGet(cityContentObj:CityContent?) {
+    fun sendGetWithRetrofit(cityContentObj:CityContent?) {
 
-        // Instantiate the RequestQueue.
-        val queue = Volley.newRequestQueue(activity)
-        val url = cityContentObj?.apiUrl
+        var model = ViewModelProvider(requireActivity(), cityViewModelFactory).get(CitiesViewModel::class.java)
 
-// Request a string response from the provided URL.
-        val stringRequest = StringRequest(
-            Request.Method.GET, url,
-            Response.Listener<String> { response ->
-                // Display the first 500 characters of the response string.
-                Log.v("TAG",response);
-                var jsonObj  = JSONObject(response);
-                var coordObj = jsonObj.getJSONObject("coord")
-                var mainObj = jsonObj.getJSONObject("main")
-                var nameObj = jsonObj.getString("name")
+        CoroutineScope(Dispatchers.Main).launch {
+            if(isAdded) {
 
-                Log.v("TAG",mainObj.getString("temp"));
+                model.getCityDetail(cityContentObj?.cityName!!).observe(requireActivity(), { cityDetail ->
+                    print(cityDetail)
+                    textViewCityName!!.text = cityDetail.name
 
-                textView!!.text = "%.2f".format(((parseFloat(mainObj.getString("temp")) - 273.15))) + " \u2103"
-                textViewCityName!!.text = nameObj
+                })
 
-
-            },
-            Response.ErrorListener {
-                //textView.text = "That didn't work!"
-            })
-
-// Add the request to the RequestQueue.
-        queue.add(stringRequest)
+            }
+        }
 
     }
+
+//    fun sendGet(cityContentObj:CityContent?) {
+//
+//        // Instantiate the RequestQueue.
+//        val queue = Volley.newRequestQueue(activity)
+//        val url = cityContentObj?.apiUrl
+//
+//// Request a string response from the provided URL.
+//        val stringRequest = StringRequest(
+//            Request.Method.GET, url,
+//            Response.Listener<String> { response ->
+//                // Display the first 500 characters of the response string.
+//                Log.v("TAG",response);
+//                var jsonObj  = JSONObject(response);
+//                var coordObj = jsonObj.getJSONObject("coord")
+//                var mainObj = jsonObj.getJSONObject("main")
+//                var nameObj = jsonObj.getString("name")
+//
+//                Log.v("TAG",mainObj.getString("temp"));
+//
+//                textView!!.text = "%.2f".format(((parseFloat(mainObj.getString("temp")) - 273.15))) + " \u2103"
+//                textViewCityName!!.text = nameObj
+//
+//
+//            },
+//            Response.ErrorListener {
+//                //textView.text = "That didn't work!"
+//            })
+//
+//// Add the request to the RequestQueue.
+//        queue.add(stringRequest)
+//
+//    }
 
 }
