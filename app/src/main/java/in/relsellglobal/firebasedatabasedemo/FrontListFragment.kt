@@ -4,11 +4,13 @@
 
 package `in`.relsellglobal.firebasedatabasedemo
 
+import `in`.relsellglobal.firebasedatabasedemo.databinding.FragmentItemListBinding
 import `in`.relsellglobal.firebasedatabasedemo.viewmodels.CitiesViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -29,6 +31,7 @@ class FrontListFragment : Fragment() {
     private var recyclerView:RecyclerView? = null
     private var myItemRecyclerViewAdapter : MyItemRecyclerViewAdapter? = null
 
+    private lateinit var binding : FragmentItemListBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,9 +46,10 @@ class FrontListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_item_list, container, false)
-        recyclerView = view.findViewById(R.id.list)
-        return view
+
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_item_list, container, false)
+        recyclerView = binding.list
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
