@@ -44,7 +44,6 @@ class MainActivityForWeatherData : AppCompatActivity(),HasAndroidInjector {
 
         val fragmentManager = supportFragmentManager
         val fT = fragmentManager.beginTransaction()
-//        fT.replace(R.id.root,FrontListFragment())
         fT.replace(R.id.root,frontListFragment)
         fT.commit()
 
