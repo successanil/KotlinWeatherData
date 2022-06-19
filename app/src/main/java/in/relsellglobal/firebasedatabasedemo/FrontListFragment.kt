@@ -79,13 +79,15 @@ class FrontListFragment @Inject constructor(): DaggerFragment() {
         var model = ViewModelProvider(requireActivity(), cityViewModelFactory).get(CitiesViewModel::class.java)
 
         CoroutineScope(Dispatchers.Main).launch {
-            model.getCitiesList().observe(requireActivity(), androidx.lifecycle.Observer { cityContentNetworkList ->
-                print(cityContentNetworkList)
-                var cityContentList = Utils.mappingCityContentNetworkToCityContent(cityContentNetworkList)
-                myItemRecyclerViewAdapter = MyItemRecyclerViewAdapter(cityContentList,activity)
-                recyclerView!!.adapter = myItemRecyclerViewAdapter
+            if(isAdded) {
+                model.getCitiesList().observe(requireActivity(), { cityContentNetworkList ->
+                    print(cityContentNetworkList)
+                    var cityContentList = Utils.mappingCityContentNetworkToCityContent(cityContentNetworkList)
+                    myItemRecyclerViewAdapter = MyItemRecyclerViewAdapter(cityContentList, activity)
+                    recyclerView!!.adapter = myItemRecyclerViewAdapter
 
-            })
+                })
+            }
         }
 
 
