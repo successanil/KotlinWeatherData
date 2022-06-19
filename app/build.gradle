@@ -1,19 +1,21 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
 
-apply plugin: 'kotlin-android'
 
-apply plugin: 'kotlin-android-extensions'
 
 def localProperitiesFile = rootProject.file("local.properties")
 def localProperties = new Properties()
 localProperties.load(new FileInputStream(localProperitiesFile))
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 32
     defaultConfig {
         applicationId "in.relsellglobal.firebasedatabasedemo"
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 32
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -24,6 +26,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    buildFeatures {
+        dataBinding true
     }
 }
 
@@ -42,9 +48,13 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    // mvvm
+    // mvvm only viewmodels as of now
     implementation "android.arch.lifecycle:extensions:1.1.1"
     annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+
+
+
+
 
 }
 

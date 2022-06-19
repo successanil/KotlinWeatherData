@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -51,8 +52,8 @@ class FrontListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         recyclerView!!.layoutManager = LinearLayoutManager(activity);
-
-        val model = ViewModelProviders.of(this).get(CitiesViewModel::class.java)
+        var model =
+            ViewModelProvider(this)[CitiesViewModel::class.java]
         model.getCitiesList().observe(this, androidx.lifecycle.Observer { cityContentList ->
             myItemRecyclerViewAdapter = MyItemRecyclerViewAdapter(cityContentList,activity)
             recyclerView!!.adapter = myItemRecyclerViewAdapter

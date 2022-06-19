@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_item.view.*
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
@@ -48,8 +47,8 @@ class MyItemRecyclerViewAdapter(
     override fun getItemCount(): Int = mValues.size
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.item_number
-        val mContentView: TextView = mView.content
+
+        val mContentView: TextView = mView.findViewById(R.id.content)
 
         override fun toString(): String {
             return super.toString() + " '" + mContentView.text + "'"
