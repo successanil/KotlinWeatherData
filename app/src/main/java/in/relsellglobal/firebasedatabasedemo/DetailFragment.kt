@@ -6,6 +6,7 @@ package `in`.relsellglobal.firebasedatabasedemo
 
 
 import `in`.relsellglobal.firebasedatabasedemo.pojo.CityContent
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,8 +18,11 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.DaggerFragment
 import org.json.JSONObject
 import java.lang.Float.parseFloat
+import javax.inject.Inject
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -30,11 +34,16 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  *
  */
-class DetailFragment : Fragment() {
+class DetailFragment @Inject constructor(): DaggerFragment() {
 
     var cityContent : CityContent? = null
     var textView : TextView? = null
     var textViewCityName : TextView? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        AndroidSupportInjection.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

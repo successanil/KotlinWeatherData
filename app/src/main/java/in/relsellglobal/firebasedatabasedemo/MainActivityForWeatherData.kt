@@ -10,6 +10,7 @@
 package `in`.relsellglobal.firebasedatabasedemo
 
 import `in`.relsellglobal.firebasedatabasedemo.databinding.ActivityMainListviewRootBinding
+import `in`.relsellglobal.firebasedatabasedemo.helpers.FragmentLaunchBackHelpers
 import `in`.relsellglobal.firebasedatabasedemo.pojo.CityContent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,9 @@ class MainActivityForWeatherData : AppCompatActivity(),HasAndroidInjector {
     @Inject
     lateinit var frontListFragment: FrontListFragment
 
+    @Inject
+    lateinit var detailFragment: DetailFragment
+
 
     override fun androidInjector(): AndroidInjector<Any> {
         return mInjector
@@ -39,29 +43,25 @@ class MainActivityForWeatherData : AppCompatActivity(),HasAndroidInjector {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState)
 
-
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main_listview_root)
 
-        val fragmentManager = supportFragmentManager
-        val fT = fragmentManager.beginTransaction()
-        fT.replace(R.id.root,frontListFragment)
-        fT.commit()
-
-
-
+        FragmentLaunchBackHelpers.launchFragmentCommon(R.id.root,supportFragmentManager,frontListFragment)
 
     }
 
     fun launchDetailFragment(item: CityContent) {
-        val fragmentManager = supportFragmentManager
-        val fT = fragmentManager.beginTransaction()
-        val detailFragment = DetailFragment()
         val b = Bundle()
         b.putParcelable("cityContent",item);
-        detailFragment.arguments = b
-        fT.replace(R.id.root,detailFragment)
-        fT.addToBackStack(null)
-        fT.commit()
+        FragmentLaunchBackHelpers.launchFragmentCommon(R.id.root,supportFragmentManager,detailFragment,true,b)
+//        val fragmentManager = supportFragmentManager
+//        val fT = fragmentManager.beginTransaction()
+//        val detailFragment = DetailFragment()
+//        val b = Bundle()
+//        b.putParcelable("cityContent",item);
+//        detailFragment.arguments = b
+//        fT.replace(R.id.root,detailFragment)
+//        fT.addToBackStack(null)
+//        fT.commit()
     }
 
 
