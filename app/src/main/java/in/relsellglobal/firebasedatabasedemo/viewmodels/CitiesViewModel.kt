@@ -20,18 +20,18 @@ class CitiesViewModel(private val weatherDataRepository: WeatherDataRepository) 
 
 
     suspend fun getCitiesList(): LiveData<List<CityContentNetwork>> {
-       // if (!::citiesContent.isInitialized) {
+        if (!::citiesContent.isInitialized) {
             citiesContent = MutableLiveData()
             loadCities()
-       // }
+        }
         return citiesContent
     }
 
     suspend fun getCityDetail(cityName:String): LiveData<CityContentDetailNetwork> {
-        if (!::cityContentNetworkDetail.isInitialized) {
-            citiesContent = MutableLiveData()
+//        if (!::cityContentNetworkDetail.isInitialized) {
+        cityContentNetworkDetail = MutableLiveData()
             fetchTempretureForCity(cityName)
-        }
+//        }
         return cityContentNetworkDetail
     }
 
