@@ -5,7 +5,7 @@
 package `in`.relsellglobal.firebasedatabasedemo
 
 
-import `in`.relsellglobal.firebasedatabasedemo.pojo.CityContent
+import `in`.relsellglobal.firebasedatabasedemo.models.CityContent
 import android.content.Context
 import android.os.Bundle
 import android.util.Log

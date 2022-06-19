@@ -8,7 +8,7 @@ package `in`.relsellglobal.firebasedatabasedemo
 
 import `in`.relsellglobal.firebasedatabasedemo.databinding.ActivityMainListviewRootBinding
 import `in`.relsellglobal.firebasedatabasedemo.helpers.FragmentLaunchBackHelpers
-import `in`.relsellglobal.firebasedatabasedemo.pojo.CityContent
+import `in`.relsellglobal.firebasedatabasedemo.models.CityContent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil

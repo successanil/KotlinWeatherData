@@ -2,7 +2,7 @@
  * Copyright (c) 2019. Relsell Global
  */
 
-package `in`.relsellglobal.firebasedatabasedemo.pojo
+package `in`.relsellglobal.firebasedatabasedemo.models
 
 import android.os.Parcel
 import android.os.Parcelable

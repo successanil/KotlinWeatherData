@@ -1,6 +1,7 @@
 package `in`.relsellglobal.firebasedatabasedemo
 
 import `in`.relsellglobal.firebasedatabasedemo.di.DaggerApplicationComponent
+import `in`.relsellglobal.firebasedatabasedemo.di.NetworkModule
 import android.app.Application
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -15,6 +16,7 @@ class MyApplication : Application(), HasAndroidInjector {
     override fun onCreate() {
         super.onCreate()
         DaggerApplicationComponent.builder()
+            .networkModule(NetworkModule())
             .build()
             .inject(this)
     }

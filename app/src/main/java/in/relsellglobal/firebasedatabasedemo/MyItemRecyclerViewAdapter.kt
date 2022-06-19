@@ -6,7 +6,7 @@ package `in`.relsellglobal.firebasedatabasedemo
 
 
 import `in`.relsellglobal.firebasedatabasedemo.databinding.FragmentItemBinding
-import `in`.relsellglobal.firebasedatabasedemo.pojo.CityContent
+import `in`.relsellglobal.firebasedatabasedemo.models.CityContent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
