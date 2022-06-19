@@ -5,11 +5,13 @@
 package `in`.relsellglobal.firebasedatabasedemo
 
 
+import `in`.relsellglobal.firebasedatabasedemo.databinding.FragmentItemBinding
 import `in`.relsellglobal.firebasedatabasedemo.pojo.CityContent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 
@@ -23,12 +25,12 @@ class MyItemRecyclerViewAdapter(
     private val activity: FragmentActivity?
     ) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
+    private lateinit var binding : FragmentItemBinding
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_item, parent, false)
-        return ViewHolder(view)
+        binding = DataBindingUtil.inflate(LayoutInflater.from(parent.context),R.layout.fragment_item, parent, false)
+        return ViewHolder(binding.root)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

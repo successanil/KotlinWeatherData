@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="50dp"
-              android:gravity="center_vertical"
-              android:background="@drawable/row_background"
-              android:layout_marginTop="@dimen/text_margin"
-              android:paddingLeft="@dimen/text_margin"
-              android:paddingRight="@dimen/text_margin"
-              android:orientation="horizontal">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/text_margin"
+        android:background="@drawable/row_background"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/text_margin"
+        android:paddingRight="@dimen/text_margin">
+
+        <TextView
             android:id="@+id/item_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:visibility="gone"
-            android:textAppearance="?attr/textAppearanceListItem"/>
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:visibility="gone" />
 
-    <TextView
+        <TextView
             android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:text="content"
-            android:textColor="#FFF"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="#FFF" />
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceListItem"/>
-
-    <ImageView android:layout_alignParentRight="true"
-               android:layout_centerVertical="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_arrow_forward_white_24dp"/>
-</RelativeLayout>
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow_forward_white_24dp" />
+    </RelativeLayout>
+</layout>
