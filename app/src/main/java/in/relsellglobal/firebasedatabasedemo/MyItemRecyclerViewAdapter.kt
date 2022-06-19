@@ -33,7 +33,7 @@ class MyItemRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mContentView!!.text = item.cityName
+        holder.mContentView.text = item.cityName
         holder.mView.setOnClickListener({
             //lets do some thing
             val des = activity as MainActivityForWeatherData

@@ -9,17 +9,21 @@
 
 package `in`.relsellglobal.firebasedatabasedemo
 
+import `in`.relsellglobal.firebasedatabasedemo.databinding.ActivityMainListviewRootBinding
 import `in`.relsellglobal.firebasedatabasedemo.pojo.CityContent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 
 class MainActivityForWeatherData : AppCompatActivity() {
 
+    lateinit var binding : ActivityMainListviewRootBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_listview_root)
+
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_main_listview_root)
 
         val fragmentManager = supportFragmentManager
         val fT = fragmentManager.beginTransaction()
