@@ -42,7 +42,9 @@ class MainActivityForWeatherData : AppCompatActivity(),HasAndroidInjector {
 
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main_listview_root)
 
-        FragmentLaunchBackHelpers.launchFragmentCommon(R.id.root,supportFragmentManager,frontListFragment)
+        if(savedInstanceState == null) {
+            FragmentLaunchBackHelpers.launchFragmentCommon(R.id.root, supportFragmentManager, frontListFragment)
+        }
 
     }
 
