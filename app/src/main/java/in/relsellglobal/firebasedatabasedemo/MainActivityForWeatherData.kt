@@ -53,15 +53,6 @@ class MainActivityForWeatherData : AppCompatActivity(),HasAndroidInjector {
         val b = Bundle()
         b.putParcelable("cityContent",item);
         FragmentLaunchBackHelpers.launchFragmentCommon(R.id.root,supportFragmentManager,detailFragment,true,b)
-//        val fragmentManager = supportFragmentManager
-//        val fT = fragmentManager.beginTransaction()
-//        val detailFragment = DetailFragment()
-//        val b = Bundle()
-//        b.putParcelable("cityContent",item);
-//        detailFragment.arguments = b
-//        fT.replace(R.id.root,detailFragment)
-//        fT.addToBackStack(null)
-//        fT.commit()
     }
 
 
