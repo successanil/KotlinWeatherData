@@ -6,6 +6,7 @@ package `in`.relsellglobal.firebasedatabasedemo
 
 import `in`.relsellglobal.firebasedatabasedemo.databinding.FragmentItemListBinding
 import `in`.relsellglobal.firebasedatabasedemo.viewmodels.CitiesViewModel
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
 
 /**
@@ -23,7 +27,7 @@ import androidx.recyclerview.widget.RecyclerView
  * Activities containing this fragment MUST implement the
  * [FrontListFragment.OnListFragmentInteractionListener] interface.
  */
-class FrontListFragment : Fragment() {
+class FrontListFragment @Inject constructor(): DaggerFragment() {
 
     // TODO: Customize parameters
     private var columnCount = 1
@@ -32,6 +36,12 @@ class FrontListFragment : Fragment() {
     private var myItemRecyclerViewAdapter : MyItemRecyclerViewAdapter? = null
 
     private lateinit var binding : FragmentItemListBinding
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        AndroidSupportInjection.inject(this)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
